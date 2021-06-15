@@ -1,0 +1,65 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        div {
+            background-color: lightblue;
+            padding: 20px;
+            color: blue;
+            text-align: center;
+                
+        }
+        table {
+            align-self: center;
+            width: 100%;
+            
+        }
+        th {
+            padding: 20px 70px 20px 70px;
+        }
+        button {
+            padding: 10px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div id="name">Коваль Алексей Николаевич</div>
+    <div id="result">Нажми на кнопку и узнаешь ответ</div>
+    <table>
+        <tr>
+            <th>
+                <button value="Салат">Любимое блюдо</button>
+            </th>
+            <th>
+                <button value="Пиво">Любимый алкогольный напиток</button>
+            </th>
+            <th>
+                <button value="Сок">Любимый безалкогольный напиток</button>
+            </th>
+        </tr>
+    </table>
+
+    <script>
+        let text = document.getElementById('result');
+        const fn = function () {
+            text.innerText = this.value;
+        }
+
+
+        let buttons = document.querySelectorAll('button');
+
+        buttons.forEach(item => {
+            item.addEventListener("click", fn);
+        });
+
+
+        let name = document.getElementById("name")
+        name.addEventListener('click', function () {
+            alert('\\Коваль\\\n\"Алексей\"\n\u2732 +380637777777\n\u26D4Одесса')
+        })
+
+    </script>
+</body>
+</html>
