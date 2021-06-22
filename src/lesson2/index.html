@@ -1,0 +1,305 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Урок 2</title>
+    <style>
+        .head {
+            background-color: lightblue;
+            padding: 20px;
+            color: blue;
+            text-align: center;
+                
+        }
+        table {
+            align-self: center;
+            width: 100%;
+            
+        }
+        th {
+            padding: 20px 70px 20px 70px;
+        }
+        button {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="head" id="name">Коваль Алексей Николаевич</div>
+    <p>
+        Написать программу, которая находит среднее арифметическое
+        значение из двух чисел.
+        <br>
+        <button id="task1">Задание 1</button>
+    </p>
+    <p>
+        Пользователь вводит число. Программа вычисляет 3-ю степень
+        этого числа
+        <br>
+        <button id="task2">Задание 2</button>
+    </p>
+    <p>
+        Написать программу, которая предлагает пользователю ввести
+        радиус окружности и считает площадь этой окружности. Число Pi
+        задать в программе как константу.
+        <br>
+        <button id="task3">Задание 3</button>
+    </p>
+    <p>
+        Написать программу, которая переводит доллары в гривны. Курс
+        доллара задать в программе как константу
+        <br>
+        <button id="task4">Задание 4</button>
+    </p>
+    <p>
+        Написать программу, которая переводит сухопутные мили в
+        километры. Одна миля – 1.609 км
+        <br>
+        <button id="task5">Задание 5</button>
+    </p>
+    <p>
+        Пользователь трижды вводит достоинство купюр и их
+        количество. Программа должна посчитать общую сумму денег.
+        <br>
+        <button id="task6">Задание 6</button>
+    </p>
+    <p>
+        Ввести с клавиатуры два 3-значных числа и поменять у них
+        средние цифры (например, ввести 357 и 702 – получить и вывести
+        числа 307 и 752).
+        <br>
+        <button id="task7">Задание 7</button>
+    </p>
+    <p>
+        Ввести 4-значное число и подсчитать сумму первой и третьей
+        цифры и разность второй и четвертой цифры.
+        <br>
+        <button id="task8">Задание 8</button>
+    </p>
+    <p>
+        Ввести с клавиатуры 3-значное число и удалить из него среднюю
+        цифру (например, ввести 3, 5, 7 – получить и вывести число 37).
+        <br>
+        <button id="task9">Задание 9</button>
+    </p>
+    <p>
+        Ввести с клавиатуры 3-значное число и «перевернуть» его
+        (например, ввести 357 – получить и вывести 753).
+        <br>
+        <button id="task10">Задание 10</button>
+    </p>
+
+
+    <script>
+        const PI = 3.1415926535;
+        const RATE = 27.1935;
+        const KM_IN_ONE_MILE = 1.609;
+
+        // вспомагательные функции
+        const getFloatNumber = function (text) {
+            let number;
+            do {
+                let sNumber = prompt(text);
+                if (sNumber == null)
+                    return null;
+                number = parseFloat(sNumber);
+
+                checkForNan(number);
+
+            } while (isNaN(number));
+            return number;
+        }
+        const getIntNumber = function (text) {
+            let number;
+            do {
+                let sNumber = prompt(text);
+                if (sNumber == null)
+                    return null;
+                number = parseInt(sNumber);
+
+                checkForNan(number);
+
+            } while (isNaN(number));
+            return number;
+        }
+
+        const getIntNumberAndCheckForLength = function(text, length) {
+            let number;
+            let notCorrectNumber;
+            do {
+                number = getIntNumber(text);
+                if (number == null)
+                    return null;
+
+                notCorrectNumber = number / (10 ** length) >= 1 || number / (10 ** length) < 0.1;
+                if (notCorrectNumber) {
+                    alert("Введённая цыфра должна иметь длину в " + length + " символ(а)");
+
+                }
+            } while (notCorrectNumber);
+            return number;
+        }
+
+        const checkForNan = function (num) {
+            if (isNaN(num)) {
+                alert("Введённое значение не цифра. повторите попытку");
+            }
+        }
+
+        //================
+
+
+        
+        //Задача №1
+        const task1 = function () {
+            let number1 = getFloatNumber("Введите первое значение для подсчёта: ");
+            if (number1 == null)
+                return;
+
+            let number2 = getFloatNumber("Введите второе значение для подсчёта: ");
+            if (number2 == null)
+                return;
+
+            alert("Среднее арифметическое из чисел (" + number1 + " и " + number2 + ") = " + (number1 + number2) / 2);
+        }
+        //==========
+
+        //Задача №2
+        const task2 = function () {
+            let num = getFloatNumber("Введите число для возведение его в 3 степень: ");
+            if (num == null)
+                return;
+
+            alert(num + " в третьей степени: " + num ** 3);
+        }
+        //==========
+
+        //Задача №3
+        const task3 = function () {
+            let r = getFloatNumber("Введите радиус окружности: ");
+            if (r == null)
+                return;
+            let S = PI * r ** 2;
+            alert("если радиус = " + r + ", то площадь оркужности = " + S);
+        }
+        //==========
+
+        //Задача №4
+        const task4 = function () {
+            let sum = getFloatNumber("Введите сумму долларов: ");
+            if (sum == null)
+                return;
+            let result = RATE * sum;
+            alert("Курс доллара к гривне: " + RATE + ". " + sum + "USD = " + result + "UAH");
+        }
+        //==========
+
+        //Задача №5
+        const task5 = function () {
+            let miles = getFloatNumber("Введите сухопутную милю: ");
+            if (miles == null)
+                return;
+            let result = miles * KM_IN_ONE_MILE;
+            alert( miles + " mile(s) = " + result + " KM");
+        }
+        //==========
+
+        //Задача №6
+        const task6 = function () {
+            let sum = 0.0;
+            let text = "";
+            for (var i = 0; i < 3; i++) {
+                alert("Шаг " + (i + 1) + "/3");
+                let denomination = getFloatNumber("Введите достоинство валюты: ");
+                if (denomination == null)
+                    return;
+
+                let cnt = getIntNumber("Введите количество купюр: ");
+                if (cnt == null)
+                    return;
+                if (i != 0) {
+                    text += "\n";
+                }
+                text = text + "Шаг №"+ (i + 1) +": достоинство: " + denomination + ", количество: " + cnt;
+
+                sum += denomination * cnt;
+            }
+            
+            
+            alert(text + "\nСумма денег: " + sum);
+        }
+        //==========
+
+        //Задача №7
+        const task7 = function () {
+            let num1 = getIntNumberAndCheckForLength("Введите первое целое число: ", 3);
+            if (num1 == null)
+                return;
+
+            let num2 = getIntNumberAndCheckForLength("Введите второе целое число: ", 3);
+            if (num2 == null)
+                return;
+
+            let newNum1 = parseInt(parseInt(num1 / 100) + "" + parseInt(num2 / 10 % 10) + "" + num1 % 10);
+            let newNum2 = parseInt(parseInt(num2 / 100) + "" + parseInt(num1 / 10 % 10) + "" + num2 % 10);
+
+            alert("Было: num1 = " + num1 + ", num2 = " + num2 + "\nСтало: num1 = " + newNum1 + ", num2 = " + newNum2);
+        }
+        //==========
+
+        //Задача №8
+        const task8 = function () {
+            let num = getIntNumberAndCheckForLength("Введите целое 4 значное число: ", 4);
+            if (num == null)
+                return;
+
+            let sum = parseInt(num / 1000) + parseInt(num / 10 % 10);
+            let diff = parseInt(num / 100 % 10) - num % 10;
+
+
+            alert("Заданное число: " + num + "\nСумма 1 и 3 цифры: " + sum + "\nРазность 2 и 4 цифры: " + diff);
+        }
+        //==========
+
+        //Задача №9
+        const task9 = function () {
+            let num = getIntNumberAndCheckForLength("Введите целое 3 значное число: ", 3);
+            if (num == null)
+                return;
+
+            let newNum = parseInt(parseInt(num / 100) + "" + (num % 10));
+            
+
+
+            alert("Заданное число: " + num + "\nСтало: " + newNum);
+        }
+        //==========
+
+        //Задача №10
+        const task10 = function () {
+            let num = getIntNumberAndCheckForLength("Введите целое 3 значное число: ", 3);
+            if (num == null)
+                return;
+
+            let newNum = parseInt((num % 10) + "" + parseInt(num/10%10) + "" + parseInt(num / 100));
+
+
+
+            alert("Заданное число: " + num + "\nСтало: " + newNum);
+        }
+        //==========
+
+        document.getElementById('task1').addEventListener('click', task1);
+        document.getElementById('task2').addEventListener('click', task2);
+        document.getElementById('task3').addEventListener('click', task3);
+        document.getElementById('task4').addEventListener('click', task4);
+        document.getElementById('task5').addEventListener('click', task5);
+        document.getElementById('task6').addEventListener('click', task6);
+        document.getElementById('task7').addEventListener('click', task7);
+        document.getElementById('task8').addEventListener('click', task8);
+        document.getElementById('task9').addEventListener('click', task9);
+        document.getElementById('task10').addEventListener('click', task10);
+    </script>
+</body>
+</html>
